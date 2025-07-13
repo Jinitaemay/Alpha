@@ -39,10 +39,10 @@ def moderate_image(client, image_path):
 
 
 # 命令行参数支持
-if __name__ == "__main__":
 import sys
 import re
 
+if __name__ == "__main__":
     client = OpenAI()
     if len(sys.argv) < 2:
         print("用法: python image_moderation_client.py <图片路径1> [图片路径2 ...]")
@@ -50,6 +50,7 @@ import re
 
     for raw_path in sys.argv[1:]:
         raw_path = raw_path.strip()
+        # 修正正则表达式，去除多余的中括号
         image_path = re.sub(r'^(["\']?)(.*?)(["\']?)$', r'\2', raw_path)
         image_path = image_path.replace('/', os.sep).replace('\\', os.sep)
         result = moderate_image(client, image_path)
