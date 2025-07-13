@@ -44,7 +44,6 @@ if __name__ == "__main__":
     import re
     client = OpenAI()
     if len(sys.argv) < 2:
-<<<<<<< HEAD
         print("用法: python image_moderation_client.py <图片路径1> [图片路径2 ...]")
         sys.exit(1)
     for raw_path in sys.argv[1:]:
@@ -57,19 +56,3 @@ if __name__ == "__main__":
             print(result.api_response.model_dump_json(indent=2))
         else:
             print("未获得API响应。")
-=======
-        print("用法: python image_moderation_client.py <图片路径>")
-        sys.exit(1)
-    # 合并所有参数为一个路径字符串，去除首尾引号
-    raw_path = " ".join(sys.argv[1:]).strip()
-    # 去除首尾单/双引号
-    image_path = re.sub(r'^["\']?(.*?)["\']?$', r'\1', raw_path)
-    # 替换正斜杠为系统路径分隔符
-    image_path = image_path.replace('/', os.sep).replace('\\', os.sep)
-    result = moderate_image(client, image_path)
-    print(result)  # 打印简要结果
-    if result.api_response:
-        print(result.api_response.model_dump_json(indent=2))
-    else:
-        print("未获得API响应。")
->>>>>>> 3f38558 (添加图文审核功能，支持将一组图文信息或多张图片提交给OpenAI进行审核)
