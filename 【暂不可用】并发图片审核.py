@@ -1,4 +1,5 @@
 import os
+import json
 import base64
 from openai import OpenAI
 
@@ -10,6 +11,8 @@ class ModerationResult:
         self.flagged = api_response.results[0].flagged if api_response else False
         
     def __str__(self):
+        if self.api_response is None:
+            return f"路径: {self.image_path}, 审核结果: 未知"
         return f"路径: {self.image_path}, 审核结果: {'违规' if self.flagged else '安全'}"
 
 def moderate_image(client, image_path):
@@ -90,9 +93,9 @@ if __name__ == "__main__":
     
     # 批量审核多张图片
     image_paths = [
-        r"C:\Users\18918\Documents\test\92126507_p0.png",
-        r"C:\Users\18918\Documents\test\92126507_p1.png",
-        r"C:\Users\18918\Documents\test\92126507_p2.png"
+        r"C:\Users\18918\Pictures\92126507_p0.png",
+        r"C:\Users\18918\Pictures\93130508_p0.png",
+        r"C:\Users\18918\Pictures\104128429_p0.png"
     ]
     
     results = moderate_images(client, image_paths)

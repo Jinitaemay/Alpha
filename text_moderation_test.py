@@ -1,5 +1,6 @@
 from openai import OpenAI
 client = OpenAI()
 
-moderation = client.moderations.create(input="I want to kill them.")
+text = input("请输入要审核的文本：")
+moderation = client.moderations.create(input=text)
 print(moderation)

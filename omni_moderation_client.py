@@ -20,6 +20,12 @@ def encode_image_to_base64(file_path):
         print(f"编码图片文件失败: {e}")
         return None
 
+def normalize_path(path):
+    path = path.strip().strip('"').strip("'")
+    path = os.path.expanduser(path)
+    path = os.path.normpath(path)
+    return path
+
 def main():
     # 初始化 OpenAI 客户端
     client = OpenAI()
